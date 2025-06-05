@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import re
+from io import StringIO
 import google.generativeai as genai
 
 # Configura tu clave de Gemini (guárdala en .streamlit/secrets.toml si es en producción)
@@ -19,7 +20,7 @@ def generar_datos_sinteticos():
     chat = model.start_chat()
     respuesta = chat.send_message(prompt)
     texto_csv = limpiar_csv(respuesta.text)
-    df = pd.read_csv(pd.compat.StringIO(texto_csv))
+    df = pd.read_csv(StringIO(texto_csv))
     return df
 
 def limpiar_csv(texto):
