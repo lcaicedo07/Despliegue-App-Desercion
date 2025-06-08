@@ -1,4 +1,5 @@
 Generador de Datos Sintéticos de Estudiantes Universitarios
+
 Descripción
 Esta aplicación web, construida con Streamlit, permite generar datos sintéticos de estudiantes universitarios. Utiliza un modelo de Inteligencia Artificial (Gemini-2.0-flash-lite) para simular características demográficas, académicas y socioeconómicas, basándose en un dataset real. Los datos generados mantienen las distribuciones, correlaciones y restricciones de los datos originales, siendo útiles para fines educativos, de prueba y análisis de modelos.
 
