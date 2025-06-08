@@ -1,0 +1,40 @@
+Generador de Datos Sintéticos de Estudiantes Universitarios
+Descripción
+Esta aplicación web, construida con Streamlit, permite generar datos sintéticos de estudiantes universitarios. Utiliza un modelo de Inteligencia Artificial (Gemini-2.0-flash-lite) para simular características demográficas, académicas y socioeconómicas, basándose en un dataset real. Los datos generados mantienen las distribuciones, correlaciones y restricciones de los datos originales, siendo útiles para fines educativos, de prueba y análisis de modelos.
+
+Características
+- Generación de datos sintéticos basados en un dataset de estudiantes universitarios.
+- Control sobre la cantidad de lotes de datos a generar (cada lote genera aproximadamente 120 registros).- Previsualización de los datos generados.
+- Funcionalidad de filtrado de datos generados.
+- Descarga de los datos sintéticos en formato CSV.
+- Validación y estandarización automática de los datos generados para asegurar la coherencia con el esquema original.
+
+Instalación y Uso
+1. Clona el repositorio:
+    git clone <URL_DEL_REPOSITORIO>
+    cd <NOMBRE_DEL_REPOSITORIO>
+2. Configura tu entorno virtual 
+3. Instala las dependencias:
+    - pip install -r requirements.txt
+4. Configura tu clave de API de Gemini:
+    - Crea un archivo .env en la raíz de tu proyecto con el siguiente contenido: GEMINI_KEY="tu_clave_api_de_gemini_aqui" Puedes obtener tu clave en Google AI Studio.
+5. Asegúrate de tener el dataset real y el prompt.
+6. Ejecuta la aplicación: streamlit run app.py. Esto abrirá la aplicación en tu navegador web.
+7. Dependencias (requirements.txt)
+Las siguientes librerías son necesarias para ejecutar el proyecto:
+google-generativeai
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+scipy
+python-dotenv
+streamlit 
+
+Desarrollado por
+Laura Valentina Caicedo
+Juan José Muñoz
+
+Advertencia
+Nota: Los datos generados por este modelo de inteligencia artificial son sintéticos. Pueden contener errores, incoherencias o información ficticia y deben ser utilizados únicamente con fines educativos, de prueba o de investigación, y no como sustitutos de datos reales para decisiones críticas.

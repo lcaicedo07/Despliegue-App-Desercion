@@ -1,0 +1,8 @@
+google-generativeai
+pandas
+numpy
+seaborn
+matplotlib
+scikit-learn
+scipy
+python-dotenv
