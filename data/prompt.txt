@@ -1,0 +1,108 @@
+Actúa como un generador de datos sintéticos y genera exactamente **12 registros** de estudiantes universitarios en formato CSV con exactamente 33 columnas: Marital status, Application mode, Application order, Course, Daytime/evening attendance, Previous qualification, Previous qualification (grade), Nacionality, Mother's qualification, Father's qualification, Mother's occupation, Father's occupation, Admission grade, Displaced, Educational special needs, Debtor, Tuition fees up to date, Gender, Scholarship holder, Age at enrollment, International, Curricular units 1st sem (credited), Curricular units 1st sem (enrolled), Curricular units 1st sem (approved), Curricular units 1st sem (grade), Curricular units 2nd sem (credited), Curricular units 2nd sem (enrolled), Curricular units 2nd sem (approved), Curricular units 2nd sem (grade), Unemployment rate, Inflation rate, GDP, Target.
+La salida debe ser únicamente una tabla con las columnas mencionadas, manteniendo la estructura del dataset real proporcionado {df_datos}.
+Recuerda colocar las 33 columnas primero.
+
+Requisitos estrictos:
+- La salida debe ser únicamente una tabla CSV con **12 filas** y 33 columnas, sin texto adicional, sin explicaciones, sin comillas alrededor de los valores, sin encabezados adicionales.
+- Asegúrate de que todos los valores numéricos (enteros o flotantes) se generen sin comillas y con el formato numérico correcto, sin ser tratados como cadenas (object).
+- **¡Cada registro generado debe ser completamente único y diferente de cualquier otro registro que hayas generado previamente o vayas a generar! Considera la totalidad de los 500 registros.**
+- ¡No generes valores nulos, N/A, null,NAN, cadenas vacías, valores omitidos, ni celdas vacías en ninguna columna. Todos los valores deben ser numéricos válidos (ints o flotantes según la columna)!.
+- Tu tarea es generar datos sintéticos que reflejen fielmente las distribuciones, correlaciones y restricciones descritas a continuación:
+
+El dataset contiene características demográficas, académicas y socioeconómicas de estudiantes universitarios, con la variable objetivo Target (0 = desertor, 1 = matriculado, 2 = graduado).
+Utiliza los siguientes valores específicos para cada columna para garantizar una generación de datos precisa, solo genera los valores especificados para las variables categóricas teniendo en cuenta sus restricciones:
+
+- Marital status (int64): Valores: 1 (soltero), 2 (casado), 3 (viudo), 4 (divorciado), 5 (unión de hecho), 6 (separado legalmente).
+Distribución: ~88% (1), ~8.5% (2), ~2% (4), <1% (3, 5, 6).
+Correlación: Correlación positiva con Age at Enrollment (0.52). Solteros: media de edad ~21.5; casados: ~36.7; divorciados: ~38.4.
+- Application mode (int64): Valores: 1 (1ª fase - contingente general), 2 (Ordenanza 612/93), 5 (1ª fase - contingente especial Azores), 7 (Titulares de otros cursos superiores), 10 (Ordenanza 854-B/99), 15 (Estudiante internacional - licenciatura), 16 (1ª fase - contingente especial Madeira), 17 (2ª fase - contingente general), 18 (3ª fase - contingente general), 26 (Ordenanza 533-A/99, b2), 27 (Ordenanza 533-A/99, b3), 39 (Mayores de 23 años), 42 (Transferencia), 43 (Cambio de curso), 44 (Titulares de diploma de especialización tecnológica), 51 (Cambio de institución/curso), 53 (Titulares de diploma de ciclo corto), 57 (Cambio de institución/curso internacional).
+Distribución: ~39% (1), ~20% (17), ~16% (39), ~5% (43), <5% otros.
+Correlación: Relacionado con el rendimiento académico y Target. Modos como 39 y 7 muestran tasas de aprobación más altas.
+- Application order (int64): Valores: 0–9.
+Distribución: Media ~1.73, mayoría en 0–2, sesgada hacia valores bajos.
+- Course (int64): Valores: 33 (Tecnologías de Producción de Biocombustibles), 171 (Diseño de Animación y Multimedia), 8014 (Servicio Social - nocturno), 9003 (Agronomía), 9070 (Diseño de Comunicación), 9085 (Enfermería Veterinaria), 9119 (Ingeniería Informática), 9130 (Equinocultura), 9147 (Gestión), 9238 (Servicio Social), 9254 (Turismo), 9500 (Enfermería), 9556 (Higiene Oral), 9670 (Gestión de Publicidad y Marketing), 9773 (Periodismo y Comunicación), 9853 (Educación Básica), 9991 (Gestión - nocturno).
+Distribución: ~17% (9500), ~6% (9991), ~6% (9119), otros menos frecuentes.
+Correlación: Varía con el rendimiento; por ejemplo, 9500 tiene tasas de deserción más bajas.
+- Daytime/evening attendance (int64): Valores: 0 (nocturno), 1 (diurno).
+Distribución: ~90% (1).
+Correlación: Asistencia nocturna (0) tiene tasas de deserción más altas (~43% vs. ~31% para diurno).
+- Previous qualification (int64): Valores: 1 (Educación secundaria), 2 (Licenciatura), 3 (Grado superior), 4 (Maestría), 5 (Doctorado), 6 (Frecuencia de educación superior), 9 (12º año incompleto), 10 (11º año incompleto), 12 (Otro - 11º año), 14 (10º año), 15 (10º año incompleto), 19 (Educación básica 3er ciclo), 38 (Educación básica 2do ciclo), 39 (Curso de especialización tecnológica), 40 (Grado superior - 1er ciclo), 42 (Curso técnico superior profesional), 43 (Maestría - 2do ciclo).
+Distribución: ~84% (1), otros <5%.
+Correlación: Calificaciones previas más altas reducen ligeramente el riesgo de deserción.
+- Previous qualification (grade) (float64): Rango: 95–190.
+Distribución: Media ~132.61, DE ~13.19, concentrado entre 120–150, sesgado a la derecha.
+Correlación: Inversamente proporcional al riesgo de deserción.
+- Nacionality (int64): Valores: 1 (Portugués), 2 (Alemán), 6 (Español), 11 (Italiano), 13 (Holandés), 14 (Inglés), 17 (Lituano), 21 (Angoleño), 22 (Caboverdiano), 24 (Guineano), 25 (Mozambiqueño), 26 (Santotomense), 32 (Turco), 41 (Brasileño), 62 (Rumano), 100 (Moldavo), 101 (Mexicano), 103 (Ucraniano), 105 (Ruso), 108 (Cubano), 109 (Colombiano).
+Distribución: ~97% (1), otros <1%.
+Correlación: Impacto menor en Target.
+- Mother's qualification, Father's qualification (int64): Valores: 1–44.
+Distribución: Medias ~19.56 (madre), ~22.27 (padre), concentradas en 1, 19, 39, 40.
+Correlación: Calificaciones parentales más altas mejoran el rendimiento académico.
+- Mother's occupation - Father's occupation (int64): Valores: 0–195.
+Distribución: Mayoría en 1–10, alta dispersión, media ~11, DE ~25.
+Correlación: Ocupaciones de nivel superior (e.g., >35) mejoran el rendimiento.
+- Admission grade (float64): Rango: 95–190.
+Distribución: Media ~126.97, DE ~14.48, concentrado entre 120–150, simétrico.
+Correlación: Inversamente proporcional al riesgo de deserción.
+- Displaced (int64): Valores: 0, 1.
+Distribución: ~45% (1).
+Correlación: Aumenta la probabilidad de deserción en ~15%.
+- Educational special needs (int64): Valores: 0, 1.
+Distribución: ~1.15% (1).
+Correlación: Aumenta ligeramente el riesgo de deserción.
+- Debtor (int64): Valores: 0, 1.
+Distribución: ~11% (1).
+Correlación: Fuertemente correlacionado con deserción (P(deserción) >60% si 1).
+- Tuition fees up to date (int64): Valores: 0, 1.
+Distribución: ~88% (1).
+Correlación: Inversamente correlacionado con Debtor; no pago (0) aumenta el riesgo de deserción (P(deserción) >80%).
+- Gender (int64): Valores: 0 (mujer), 1 (hombre).
+Distribución: ~65% (0).
+Correlación: Hombres tienen ~20% más probabilidad de deserción (~45% vs. ~25% para mujeres).
+- Scholarship holder (int64): Valores: 0, 1.
+Distribución: ~25% (1).
+Correlación: Reduce la probabilidad de deserción (P(deserción) ~12% vs. ~39% para no becarios).
+- Age at enrollment (int64): Rango: 17–70.
+Distribución: Media ~23.27, DE ~7.59, sesgada hacia 17–23, valores atípicos >50 posibles.
+Correlación: Probabilidad de deserción aumenta ~5% cada 5 años por encima de 25.
+- International (int64): Valores: 0, 1.
+Distribución: ~2.4% (1).
+Correlación: Impacto menor en Target.
+- Curricular units 1st sem (credited) - Curricular units 2nd sem (credited) (int64): Valores: 0–10.
+Distribución: ~85% (0), media ~0.5–1.
+Correlación: Más créditos reducen el riesgo de deserción.
+- Curricular units 1st sem (enrolled) - Curricular units 2nd sem (enrolled) (int64): Valores: 0–10.
+Distribución: Media ~6, concentrado en 5–10.
+Correlación: Mayor matrícula reduce ligeramente el riesgo de deserción.
+- Curricular units 1st sem (approved) - Curricular units 2nd sem (approved) (int64): Valores: 0–10.
+Distribución: Media ~4.5–5, picos en 5–7, alta deserción si 0.
+Correlación: Fuerte correlación inversa con deserción (P(deserción) >65% si suma <3).
+- Curricular units 1st sem (grade) - Curricular units 2nd sem (grade) (float64): Rango: 0–20.
+Distribución: Media ~10.6 (1er semestre), ~10.2 (2do semestre), DE ~5, concentrado en 10–15, sesgado.
+Correlación: Notas <2 predicen fuertemente deserción (P(deserción) >75% si 0).
+- Unemployment rate (float64): Rango: 7.6–16.2.
+Distribución: Media ~11.57, DE ~2.66, pico en ~12%.
+Correlación: Directamente proporcional a la deserción.
+- Inflation rate (float64): Rango: -0.8–3.7.
+Distribución: Media ~1.23, DE ~1.38, picos en ~1% y ~2%.
+Correlación: Mayor inflación aumenta ligeramente la deserción.
+- GDP (float64): Rango: -4.06–3.51.
+Distribución: Media ~-0.0019, DE ~2.27, pico en ~2.
+Correlación: Menor PIB aumenta ligeramente la deserción.
+- Target (int64): Valores: 0 (desertor), 1 (matriculado), 2 (graduado).
+Distribución: ~35% (0), ~22% (1), ~43% (2).
+Correlación: Fuertemente influenciada por variables académicas (e.g., unidades aprobadas, notas), financieras (e.g., deudor, matrícula al día) y demográficas (e.g., edad, género).
+
+Además, tener en cuenta las siguientes reglas de consistencia:
+Curricular units (enrolled) ≥ Curricular units (approved) para cada semestre.
+Curricular units (grade) = 0 → Curricular units (approved) = 0.
+Debtor=1 → Alta probabilidad de Tuition fees up to date=0.
+Mantén valores atípicos realistas (ejemplo: Age at enrollment >50 es raro pero posible).
+Preserva valores negativos para Inflation rate y GDP cuando corresponda.
+Mantén consistencia de los rangos de los datos establecidos.
+
+Y los siguientes requisitos:
+Mantén las proporciones de categorías minoritarias establecidas.
+Preserva valores atípicos realistas basados en el dataset real.
+Respeta las correlaciones, especialmente con Target.
+No generes valores nulos en ninguna columna.
