@@ -14,7 +14,7 @@ st.markdown(
             background-color: #F5F7FA;
         }
         div[data-testid="stButton"] button {
-            background-color: #4A90E2;
+            background-color: #90C2E7;
             font-size: 16px;
             padding: 12px 20px;
             border-radius: 8px;
