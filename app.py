@@ -75,7 +75,7 @@ with st.container():
             <div style="background-color: #F0F8FF; padding: 15px; border-radius: 5px;">
                 <b style="font-size:16px; color:#2E86C1;">Guía de uso</b>
                 <p style="text-align: left; font-size:15px; color:#333;">
-                - Elige la cantidad de lotes de datos que deseas generar. (Cada lote genera aproximadamente 120 datos).<br>
+                - Elige la cantidad de lotes de datos que deseas generar. (Cada lote genera aproximadamente 100 datos).<br>
                 - Presiona <b>Generar datos sintéticos</b> para iniciar el proceso.<br>
                 - Explora y filtra los datos generados en la tabla.<br>
                 - Descarga los resultados en formato CSV para tus análisis.
