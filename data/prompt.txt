@@ -1,9 +1,9 @@
-Actúa como un generador de datos sintéticos y genera exactamente **10 registros** de estudiantes universitarios en formato CSV con exactamente 33 columnas: Marital status, Application mode, Application order, Course, Daytime/evening attendance, Previous qualification, Previous qualification (grade), Nacionality, Mother's qualification, Father's qualification, Mother's occupation, Father's occupation, Admission grade, Displaced, Educational special needs, Debtor, Tuition fees up to date, Gender, Scholarship holder, Age at enrollment, International, Curricular units 1st sem (credited), Curricular units 1st sem (enrolled), Curricular units 1st sem (approved), Curricular units 1st sem (grade), Curricular units 2nd sem (credited), Curricular units 2nd sem (enrolled), Curricular units 2nd sem (approved), Curricular units 2nd sem (grade), Unemployment rate, Inflation rate, GDP, Target.
+Actúa como un generador de datos sintéticos y genera exactamente **10 registros** de estudiantes universitarios en formato CSV con exactamente 37 columnas: Marital status, Application mode, Application order, Course, Daytime/evening attendance, Previous qualification, Previous qualification (grade), Nacionality, Mother's qualification, Father's qualification, Mother's occupation, Father's occupation, Admission grade, Displaced, Educational special needs, Debtor, Tuition fees up to date, Gender, Scholarship holder, Age at enrollment, International, Curricular units 1st sem (credited), Curricular units 1st sem (enrolled), Curricular units 1st sem (approved), Curricular units 1st sem (grade), Curricular units 2nd sem (credited), Curricular units 2nd sem (enrolled), Curricular units 2nd sem (approved), Curricular units 2nd sem (grade), Unemployment rate, Inflation rate, GDP, Target.
 La salida debe ser únicamente una tabla con las columnas mencionadas, manteniendo la estructura del dataset real proporcionado {df_datos}.
-Recuerda colocar las 33 columnas primero.
+Recuerda colocar las 37 columnas primero.
 
 Requisitos estrictos:
-- La salida debe ser únicamente una tabla CSV con **10 filas** y 33 columnas, sin texto adicional, sin explicaciones, sin comillas alrededor de los valores, sin encabezados adicionales.
+- La salida debe ser únicamente una tabla CSV con **10 filas** y 37 columnas, sin texto adicional, sin explicaciones, sin comillas alrededor de los valores, sin encabezados adicionales.
 - Asegúrate de que todos los valores numéricos (enteros o flotantes) se generen sin comillas y con el formato numérico correcto, sin ser tratados como cadenas (object).
 - **¡Cada registro generado debe ser completamente único y diferente de cualquier otro registro que hayas generado previamente o vayas a generar! Considera la totalidad de los 500 registros.**
 - ¡No generes valores nulos, N/A, null,NAN, cadenas vacías, valores omitidos, ni celdas vacías en ninguna columna. Todos los valores deben ser numéricos válidos (ints o flotantes según la columna)!.
@@ -74,12 +74,21 @@ Correlación: Más créditos reducen el riesgo de deserción.
 - Curricular units 1st sem (enrolled) - Curricular units 2nd sem (enrolled) (int64): Valores: 0–10.
 Distribución: Media ~6, concentrado en 5–10.
 Correlación: Mayor matrícula reduce ligeramente el riesgo de deserción.
+- Curricular units 1st sem (evaluations) (int64): Valores: 0-45
+Distribución: Media ~8.29, concentrado en 6-10.
+Correlación: Mayor materias evaluadas reduce ligeramente el riesgo de deserción.
+- Curricular units 2nd sem (evaluations) (int64): Valores: 0-33 
+Distribución: Media ~8.06, concentrado en 6-10.
+Correlación: Mayor materias evaluadas reduce ligeramente el riesgo de deserción.
 - Curricular units 1st sem (approved) - Curricular units 2nd sem (approved) (int64): Valores: 0–10.
 Distribución: Media ~4.5–5, picos en 5–7, alta deserción si 0.
 Correlación: Fuerte correlación inversa con deserción (P(deserción) >65% si suma <3).
 - Curricular units 1st sem (grade) - Curricular units 2nd sem (grade) (float64): Rango: 0–20.
 Distribución: Media ~10.6 (1er semestre), ~10.2 (2do semestre), DE ~5, concentrado en 10–15, sesgado.
 Correlación: Notas <2 predicen fuertemente deserción (P(deserción) >75% si 0).
+- Curricular units 1st sem (without evaluations), Curricular units 2nd sem (without evaluations) (int64): Valores: 0-12    
+Distribución: Media ~0.14, concentrado en casi todos los estudiantes tienen 0 asignaturas sin evaluación, aunque algunos pocos llegan hasta 12.
+Correlación: Mayor materias sin ser evaluadas aumenta ligeramente el riesgo de deserción.
 - Unemployment rate (float64): Rango: 7.6–16.2.
 Distribución: Media ~11.57, DE ~2.66, pico en ~12%.
 Correlación: Directamente proporcional a la deserción.

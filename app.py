@@ -121,7 +121,7 @@ with st.container():
     if st.button(":rocket: **Generar datos sintéticos**"):
         with st.spinner("Procesando datos... Un momento, por favor..."):
             try:
-                datos_sinteticos = generate_synthetic_data(df_datos, prompt, model, num_lotes * 10)
+                datos_sinteticos = generate_synthetic_data(df_datos, prompt, model, num_lotes * 20)
                 if datos_sinteticos:
                     combined_data = ""
                     for batch_num, lote, _ in datos_sinteticos:
